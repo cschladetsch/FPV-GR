@@ -6,6 +6,23 @@ using UnityEngine.UI;
 
 public class World : BaseObject
 {
+	public void QuitFromGameButtonPressed ()
+	{
+		CurrentLevel.Stop();
+		ActivateGameCanvas(false);
+		Debug.Log("World.EndGame");
+	}
+
+	public void StartGame ()
+	{
+		ActivateGameCanvas(true);
+		Debug.Log("World.StartGame");
+	}
+
+	public Canvas GameCanvas;
+	public Canvas StartCanvas;
+
+
 	public static World Instance;
 
 	public bool Loaded { get { return _loaded; } }
@@ -16,6 +33,12 @@ public class World : BaseObject
 	private bool _loaded;
 
 	public string[] ScenesToLoad;
+
+	void ActivateGameCanvas(bool inGame)
+	{
+		GameCanvas.gameObject.SetActive (inGame);
+		StartCanvas.gameObject.SetActive (!inGame);
+	}
 
 	/// <summary>
 	/// Used to initialise the singleton World object
@@ -28,7 +51,10 @@ public class World : BaseObject
 
 		// TODO: combine scenes
 		_loaded = true;
+
+		ActivateGameCanvas(false);
 	}
+
 
 	override protected void Construct()
 	{

@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class TimePanel : BaseObject
 {
+	public TimeDisplay Best;
+	public TimeDisplay Avergage;
+	public TimeDisplay Worst;
+
 	override protected void Construct()
 	{
 		base.Construct();

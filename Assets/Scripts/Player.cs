@@ -50,8 +50,7 @@ public class Player : BaseObject
 
 		transform.position = pos;
 
-		Debug.Log (string.Format ("Player.Move: {0}, {1}", pos, _speed));
-	//	rot =
+		//Debug.Log (string.Format ("Player.Move: {0}, {1}", pos, _speed));
 	}
 
 	// sigh... .net 4.5 [Flags]
