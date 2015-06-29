@@ -12,6 +12,8 @@ public class World : BaseObject
 	[Tooltip("The Canvas for use for the pre-game scene")]
 	public Canvas StartCanvas;
 
+	public Camera SplashCamera;
+
 	public static World Instance;
 
 	/// <summary>
@@ -45,7 +47,7 @@ public class World : BaseObject
 	public void QuitFromGameButtonPressed()
 	{
 		CurrentLevel.Stop();
-		ActivateGameCanvas(false);
+		ActivateGame(false);
 		Debug.Log("World.EndGame");
 	}
 
@@ -54,14 +56,20 @@ public class World : BaseObject
 	/// </summary>
 	public void StartGame ()
 	{
-		ActivateGameCanvas(true);
-		Debug.Log("World.StartGame");
+		ActivateGame(true);
 	}
 
-	void ActivateGameCanvas(bool inGame)
+	void ActivateGame(bool inGame)
 	{
-		GameCanvas.gameObject.SetActive (inGame);
-		StartCanvas.gameObject.SetActive (!inGame);
+		Debug.Log("World.ActivateGame: " + inGame);
+
+		// switch canvas's
+		GameCanvas.gameObject.SetActive(inGame);
+		StartCanvas.gameObject.SetActive(!inGame);
+
+		// switch Camera's
+		FindObjectOfType<Player>().GetComponent<Camera>().enabled = inGame;
+		SplashCamera.enabled = !inGame;
 	}
 
 	/// <summary>
@@ -76,7 +84,7 @@ public class World : BaseObject
 		// TODO: combine scenes
 		_loaded = true;
 
-		ActivateGameCanvas(false);
+		ActivateGame(false);
 	}
 
 	override protected void Construct()

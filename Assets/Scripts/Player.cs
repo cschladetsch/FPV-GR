@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Player : BaseObject
 {
+	Camera FpVCamera;
+
 	[Tooltip("Where the player starts")]
 	public Transform StartPoint;
 
@@ -46,7 +48,7 @@ public class Player : BaseObject
 		var pos = tr.position;
 		var rot = tr.rotation;
 
-		pos = Vector3.SmoothDamp(pos, tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
+		pos = Vector3.SmoothDamp(pos, pos + tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
 
 		transform.position = pos;
 
@@ -99,13 +101,11 @@ public class Player : BaseObject
 		if (On(flags, ControlInput.Backward))
 			_speed -= MaxAccel;
 
-		_speed = Mathf.Clamp (_speed, -MaxSpeed, MaxSpeed);
+		_speed = Mathf.Clamp(_speed, -MaxSpeed, MaxSpeed);
 	}
 
 	float Clamp360(float a)
 	{
-		Debug.Log(a);
-
 		while (a  > 360)
 			a -= 360;
 
@@ -128,7 +128,7 @@ public class Player : BaseObject
 
 	void ProcessInput(int flags)
 	{
-		ChangeSpeed (flags);
+		ChangeSpeed(flags);
 
 		ChangeDirection(flags);
 	}
