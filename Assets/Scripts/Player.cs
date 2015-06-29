@@ -104,10 +104,14 @@ public class Player : BaseObject
 
 	float Clamp360(float a)
 	{
+		Debug.Log(a);
+
 		while (a  > 360)
 			a -= 360;
-		while (_yaw < 0)
+
+		while (a < 0)
 			a += 360;
+
 		return a;
 	}
 
@@ -127,8 +131,5 @@ public class Player : BaseObject
 		ChangeSpeed (flags);
 
 		ChangeDirection(flags);
-
-
 	}
 }
-
