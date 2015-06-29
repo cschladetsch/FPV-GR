@@ -61,7 +61,7 @@ public class World : BaseObject
 
 	void ActivateGame(bool inGame)
 	{
-		Debug.Log("World.ActivateGame: " + inGame);
+		//Debug.Log("World.ActivateGame: " + inGame);
 
 		// switch canvas's
 		GameCanvas.gameObject.SetActive(inGame);
