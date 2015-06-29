@@ -13,15 +13,17 @@ public class Player : BaseObject
 
 	[Tooltip("How fast the player can accel")]
 	public float MaxAccel = 500;		// maximum acceleration in m/s/s
-	public float MaxSpeed = 20;		// m/s
+	public float MaxSpeed = 20;			// m/s
 	public float MinSpeed = 0;
-	public float TurnRate = 25; 	// deg/s
+	public float TurnRate = 25; 		// deg/s
+
+	public float Friction = 0.5f;
 
 	public float MoveDampTime = 0.2f;
-	public float RotDampTime = 5.5f;
+	public float RotDampTime = 0.5f;
 
 	float _speed;
-	float _yaw;
+	float _yaw, _pitch, _roll;
 
 	override protected void Construct()
 	{
@@ -47,15 +49,17 @@ public class Player : BaseObject
 		var tr = transform;	
 		var pos = tr.position;
 		var rot = tr.rotation;
+		var newRot = Quaternion.AngleAxis(_yaw, Vector3.up);
+		
+		Debug.Log (string.Format("{0} {1}", _yaw, newRot));
 
-		pos = Vector3.SmoothDamp(pos, pos + tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
+		//_speed *= Friction*Time.deltaTime;
 
-		transform.position = pos;
-
-		//Debug.Log (string.Format ("Player.Move: {0}, {1}", pos, _speed));
+		transform.rotation = Quaternion.Slerp(rot, newRot, RotDampTime);
+		transform.position = Vector3.SmoothDamp(pos, pos + tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
 	}
 
-	// sigh... .net 4.5 [Flags]
+	// sigh... .net 4.5 [Flags]	
 	enum ControlInput
 	{
 		Forward = 1,
@@ -117,13 +121,12 @@ public class Player : BaseObject
 
 	void ChangeDirection(int flags)
 	{
-		if (On(flags, ControlInput.Forward))
-			_yaw += Time.deltaTime * MaxAccel;
+		if (On(flags, ControlInput.Left))
+			_yaw += TurnRate*Time.deltaTime;
+		else if (On(flags, ControlInput.Right))
+			_yaw -= -TurnRate*Time.deltaTime;
 
-		if (On(flags, ControlInput.Backward))
-			_yaw -= Time.deltaTime * MaxAccel;
-
-		_yaw = Clamp360(_yaw);
+		//_yaw = Clamp360(_yaw)*Mathf.Deg2Rad;
 	}
 
 	void ProcessInput(int flags)
