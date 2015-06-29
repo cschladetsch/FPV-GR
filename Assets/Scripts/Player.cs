@@ -10,8 +10,7 @@ public class Player : BaseObject
 	public Transform StartPoint;
 
 	[Tooltip("How fast the player can accel")]
-
-	public float MaxAccel = 5;		// maximum acceleration in m/s/s
+	public float MaxAccel = 500;		// maximum acceleration in m/s/s
 	public float MaxSpeed = 20;		// m/s
 	public float MinSpeed = 0;
 	public float TurnRate = 25; 	// deg/s
@@ -43,11 +42,15 @@ public class Player : BaseObject
 
 	void Move()
 	{
-		var tr = transform;
+		var tr = transform;	
 		var pos = tr.position;
 		var rot = tr.rotation;
 
-		pos += Vector3.SmoothDamp(pos, tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
+		pos = Vector3.SmoothDamp(pos, tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
+
+		transform.position = pos;
+
+		Debug.Log (string.Format ("Player.Move: {0}, {1}", pos, _speed));
 	//	rot =
 	}
 
@@ -92,10 +95,10 @@ public class Player : BaseObject
 	void ChangeSpeed(int flags)
 	{
 		if (On(flags, ControlInput.Forward))
-			_speed += Time.deltaTime * MaxAccel;
+			_speed += MaxAccel;
 
 		if (On(flags, ControlInput.Backward))
-			_speed -= Time.deltaTime * MaxAccel;
+			_speed -= MaxAccel;
 
 		_speed = Mathf.Clamp (_speed, -MaxSpeed, MaxSpeed);
 	}
