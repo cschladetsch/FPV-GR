@@ -6,33 +6,57 @@ using UnityEngine.UI;
 
 public class World : BaseObject
 {
-	public void QuitFromGameButtonPressed ()
+	[Tooltip("The Canvas for use for the in-game scene")]
+	public Canvas GameCanvas;
+
+	[Tooltip("The Canvas for use for the pre-game scene")]
+	public Canvas StartCanvas;
+
+	public static World Instance;
+
+	/// <summary>
+	/// True if all mixin scenes have been loaded.
+	/// </summary>
+	public bool Loaded { get { return _loaded; } }
+
+	/// <summary>
+	/// The Co-Routine kernel used by the game
+	/// </summary>
+	/// <value>The kernel.</value>
+	public new  Flow.IKernel Kernel { get { return _kernel; } }
+
+	/// <summary>
+	/// When using multiple mixin scenes, they are specified here.
+	/// This allows multiple people to work on differnt, otherwise disjoint aspects of
+	/// the same scene.
+	/// </summary>
+	public string[] ScenesToLoad;
+	
+	Flow.IKernel _kernel;
+
+	/// <summary>
+	/// True if all mixin scenes are loaded
+	/// </summary>
+	private bool _loaded;
+	
+	/// <summary>
+	/// Invoked when the quit game button is pressed when in game mode
+	/// </summary>
+	public void QuitFromGameButtonPressed()
 	{
 		CurrentLevel.Stop();
 		ActivateGameCanvas(false);
 		Debug.Log("World.EndGame");
 	}
 
+	/// <summary>
+	/// Starts the game.
+	/// </summary>
 	public void StartGame ()
 	{
 		ActivateGameCanvas(true);
 		Debug.Log("World.StartGame");
 	}
-
-	public Canvas GameCanvas;
-	public Canvas StartCanvas;
-
-
-	public static World Instance;
-
-	public bool Loaded { get { return _loaded; } }
-
-	public new  Flow.IKernel Kernel { get { return _kernel; } }
-
-	Flow.IKernel _kernel;
-	private bool _loaded;
-
-	public string[] ScenesToLoad;
 
 	void ActivateGameCanvas(bool inGame)
 	{
@@ -54,7 +78,6 @@ public class World : BaseObject
 
 		ActivateGameCanvas(false);
 	}
-
 
 	override protected void Construct()
 	{
