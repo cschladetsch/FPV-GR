@@ -51,10 +51,6 @@ public class Player : BaseObject
 		var rot = tr.rotation;
 		var newRot = Quaternion.AngleAxis(_yaw, Vector3.up);
 		
-		Debug.Log (string.Format("{0} {1}", _yaw, newRot));
-
-		//_speed *= Friction*Time.deltaTime;
-
 		transform.rotation = Quaternion.Slerp(rot, newRot, RotDampTime);
 		transform.position = Vector3.SmoothDamp(pos, pos + tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
 	}
