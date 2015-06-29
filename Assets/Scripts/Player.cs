@@ -122,9 +122,10 @@ public class Player : BaseObject
 	void ChangeDirection(int flags)
 	{
 		if (On(flags, ControlInput.Left))
+			_yaw -= TurnRate*Time.deltaTime;
+
+		if (On(flags, ControlInput.Right))
 			_yaw += TurnRate*Time.deltaTime;
-		else if (On(flags, ControlInput.Right))
-			_yaw -= -TurnRate*Time.deltaTime;
 
 		//_yaw = Clamp360(_yaw)*Mathf.Deg2Rad;
 	}
