@@ -17,7 +17,8 @@ public class Player : BaseObject
 	public float MinSpeed = 0;
 	public float TurnRate = 25; 		// deg/s
 
-	public float Friction = 0.5f;
+	public float SpeedFriction = 0.2f;
+	public float YawFriction = 5.0f;
 
 	public float MoveDampTime = 0.2f;
 	public float RotDampTime = 0.5f;
@@ -33,12 +34,18 @@ public class Player : BaseObject
 		transform.rotation = StartPoint.rotation;
 	}
 
+	void ApplyFriction()
+	{
+		_speed = Mathf.Clamp(_speed*SpeedFriction*Time.deltaTime, -_speed, _speed);
+	}
+
 	override protected void Tick()
 	{
 		base.Tick();
 
 		ProcessInput(GetInput());
 
+		//ApplyFriction();
 		Move();
 	}
 
