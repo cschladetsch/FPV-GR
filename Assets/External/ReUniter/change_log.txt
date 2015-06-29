@@ -1,0 +1,6 @@
+1.3 - Performance fix for version 1.2.
+1.2 - True fuzzy searched and weighted ranking. Typed search (materials, shaders, textures, etc). Adding icons to search results.
+1.1 - Added ability to reposition the window (from Tools->ReUniter->Change Window Location)
+    - Added ping/highlight - hold Alt then press Enter or click mouse to just highlight the item in its corresponding window
+	- Fixed window positioning bug
+1.0 - Initial release
