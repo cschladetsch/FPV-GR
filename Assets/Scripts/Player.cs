@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class Player : BaseObject
 {
+	[Tooltip("Where the player starts")]
 	public Transform StartPoint;
 
-	public float MaxAccel = 5;
-	public float MaxSpeed = 20;		// world units/second
+	[Tooltip("How fast the player can accel")]
+
+	public float MaxAccel = 5;		// maximum acceleration in m/s/s
+	public float MaxSpeed = 20;		// m/s
 	public float MinSpeed = 0;
-	public float TurnRate = 25; 	// degreees/second
+	public float TurnRate = 25; 	// deg/s
 
 	public float MoveDampTime = 0.2f;
 	public float RotDampTime = 5.5f;
@@ -22,11 +25,9 @@ public class Player : BaseObject
 	override protected void Construct()
 	{
 		base.Construct();
-	}
 
-	override protected void BeforeFirstTick()
-	{
-		base.BeforeFirstTick();
+		transform.position = StartPoint.position;
+		transform.rotation = StartPoint.rotation;
 	}
 
 	override protected void Tick()
@@ -46,11 +47,11 @@ public class Player : BaseObject
 		var pos = tr.position;
 		var rot = tr.rotation;
 
-		pos += Vector3.SmoothDamp(pos, tr.forward*_speed*Time.deltaTime, _moveVel, MoveDampTime);
+		pos += Vector3.SmoothDamp(pos, tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
 	//	rot =
 	}
 
-	// sign... .net 4.5 [Flags]
+	// sigh... .net 4.5 [Flags]
 	enum ControlInput
 	{
 		Forward = 1,
@@ -58,42 +59,65 @@ public class Player : BaseObject
 		Left = 4,
 		Right = 8,
 	}
+	
+	bool On(int flags, ControlInput inp)
+	{
+		return (flags & (int)inp) != 0;
+	}
+	
+	bool Off(int flags, ControlInput inp)
+	{
+		return !On(flags, inp);
+	}
 
 	int GetInput()
 	{
-		int input;
+		int input = 0;
 
 		if (Input.GetKey(KeyCode.UpArrow))
-			input |= ControlInput.Forward;
+			input |= (int)ControlInput.Forward;
 
 		if (Input.GetKey(KeyCode.DownArrow))
-			input |= ControlInput.Backward;
+			input |= (int)ControlInput.Backward;
 
 		if (Input.GetKey(KeyCode.LeftArrow))
-			input |= ControlInput.Left;
+			input |= (int)ControlInput.Left;
 
 		if (Input.GetKey(KeyCode.RightArrow))
-			input |= ControlInput.Right;
+			input |= (int)ControlInput.Right;
 
 		return input;
 	}
 
-	void ChangeSpeed (int flags)
+	void ChangeSpeed(int flags)
 	{
-		if (flags & ControlInput.Forward)
+		if (On(flags, ControlInput.Forward))
 			_speed += Time.deltaTime * MaxAccel;
-		if (flags & ControlInput.Backward)
+
+		if (On(flags, ControlInput.Backward))
 			_speed -= Time.deltaTime * MaxAccel;
+
 		_speed = Mathf.Clamp (_speed, -MaxSpeed, MaxSpeed);
 	}
 
-	void ChangeDirection (int flags)
+	float Clamp360(float a)
 	{
-		if (flags & ControlInput.Forward)
+		while (a  > 360)
+			a -= 360;
+		while (_yaw < 0)
+			a += 360;
+		return a;
+	}
+
+	void ChangeDirection(int flags)
+	{
+		if (On(flags, ControlInput.Forward))
 			_yaw += Time.deltaTime * MaxAccel;
-		if (flags & ControlInput.Backward)
+
+		if (On(flags, ControlInput.Backward))
 			_yaw -= Time.deltaTime * MaxAccel;
-		_yaw = Mathf.Clamp (_yaw, 0, 360);
+
+		_yaw = Clamp360(_yaw);
 	}
 
 	void ProcessInput(int flags)
