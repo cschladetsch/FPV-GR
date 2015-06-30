@@ -36,7 +36,12 @@ public class Player : BaseObject
 
 	void ApplyFriction()
 	{
-		_speed = Mathf.Clamp(_speed*SpeedFriction*Time.deltaTime, -_speed, _speed);
+		var fr = SpeedFriction*Time.deltaTime;
+
+		if (_speed > 0)
+			_speed -= fr;
+		else
+			_speed += fr;
 	}
 
 	override protected void Tick()
@@ -45,7 +50,8 @@ public class Player : BaseObject
 
 		ProcessInput(GetInput());
 
-		//ApplyFriction();
+		ApplyFriction();
+
 		Move();
 	}
 
