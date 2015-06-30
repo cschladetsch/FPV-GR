@@ -4,8 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// The player passes through gates in any order. Currently there is assumed
+/// to be only one player, but we will need separate indicators and HasBeenEntered
+/// flags for each player (or inverse this, and store that info in Player class).
+/// </summary>
 public class Gate : BaseObject
 {
+	/// <summary>
+	/// The indicator that shows if this gate has been passed through or not.
+	/// </summary>
 	public GameObject Indicator;
 
 	public bool HasBeenEntered { get; private	set; }
@@ -35,12 +43,18 @@ public class Gate : BaseObject
 		base.Tick();
 	}
 
-	public void Reset ()
+	/// <summary>
+	/// Reset this gate for start of new game.
+	/// </summary>
+	public void Reset()
 	{
 		HasBeenEntered = false;
 		Indicator.SetActive(true);
 	}
 
+	/// <summary>
+	/// The player as entered this gate.
+	/// </summary>
 	public void Entered()
 	{
 		if (HasBeenEntered)

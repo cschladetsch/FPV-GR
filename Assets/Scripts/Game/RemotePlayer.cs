@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// One of possibly many *Remote* players.
+/// </summary>
 public class RemotePlayer : BaseObject
 {
 	override protected void Construct()

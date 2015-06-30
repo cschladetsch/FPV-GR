@@ -1,5 +1,8 @@
 ﻿using Flow;
 
+/// <summary>
+/// Wrapper for placing a Flow.IKernel into a GameObject.
+/// </summary>
 public class Kernel : BaseObject
 {
 	public IKernel Kern;

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Unused.
+/// </summary>
 public class Level : BaseObject
 {
 	public void Stop ()

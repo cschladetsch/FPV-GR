@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Time display.
+/// </summary>
 public class TimeDisplay : BaseObject
 {
 	override protected void Construct()

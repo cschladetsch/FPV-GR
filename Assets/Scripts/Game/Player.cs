@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// The *Local* Player.
+/// </summary>
 public class Player : BaseObject
 {
 	Camera FpVCamera;

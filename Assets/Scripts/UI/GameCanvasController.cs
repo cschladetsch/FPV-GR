@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Game canvas controller, for in-game UI events and display.
+/// </summary>
 public class GameCanvasController : BaseObject
 {
 	public Text TotalTimeText;

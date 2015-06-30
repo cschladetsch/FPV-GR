@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Logic for main game sequence: flying through hoops
+/// </summary>
 public class Game : BaseObject
 {
 	public float TotalTime { get { return _time; } }
@@ -41,19 +44,18 @@ public class Game : BaseObject
 		World.GateManager.GateEntered += EnteredGate;
 	}
 
-
 	override protected void Tick()
 	{
+		base.Tick();
+
 		_time += GameDeltaTime;
 
 		World.GameCanvas.SetTotalTime(_time);
-
-		base.Tick();
 	}
 
 	public void StartGame()
 	{
-		Debug.Log ("Game.StartGame");
+		Debug.Log("Game.StartGame");
 		
 		_time = 0;
 

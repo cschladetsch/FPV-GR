@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Start canvas controller for pre-game and splash screen.
+/// Shows best times and leaderboards, allows to login to FB.
+/// </summary>
 public class StartCanvasController : BaseObject
 {
 	override protected void Construct()

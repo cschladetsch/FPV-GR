@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Time panel contains a collection of TimeDisplay objectss
+/// </summary>
 public class TimePanel : BaseObject
 {
 	public TimeDisplay Best;
@@ -35,4 +38,3 @@ public class TimePanel : BaseObject
 		base.Tick();
 	}
 }
-

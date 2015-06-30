@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Deals with all the gates in the game. Could be folded into Game class, but this seemed easier all round.
+/// </summary>
 public class GateManager : BaseObject
 {
 	public List<Gate> Gates = new List<Gate>();
@@ -32,25 +35,4 @@ public class GateManager : BaseObject
 
 		World.Game.EndGame();
 	}
-
-	override protected void Destruct()
-	{
-		base.Destruct();
-	}
-
-	override protected void ResetForPool()
-	{
-		base.ResetForPool();
-	}
-	
-	override protected void BeforeFirstTick()
-	{
-		base.BeforeFirstTick();
-	}
-
-	override protected void Tick()
-	{
-		base.Tick();
-	}
 }
-
