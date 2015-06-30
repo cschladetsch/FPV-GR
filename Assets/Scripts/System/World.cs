@@ -76,7 +76,7 @@ public class World : BaseObject
 
 	GateManager _gateManager;
 
-	void ActivateGame(bool inGame)
+	public void ActivateGame(bool inGame)
 	{
 		Debug.Log("World.ActivateGame: " + inGame);
 

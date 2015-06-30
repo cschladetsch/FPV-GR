@@ -37,8 +37,6 @@ public class Game : BaseObject
 	{
 		base.BeforeFirstTick();
 
-		Debug.Log ("Construct");
-
 		World.GateManager.GateEntered -= EnteredGate;
 		World.GateManager.GateEntered += EnteredGate;
 	}
@@ -55,6 +53,8 @@ public class Game : BaseObject
 
 	public void StartGame()
 	{
+		_time = 0;
+
 		World.GateManager.GatherGates();
 
 		World.GameCanvas.SetNumGatesRemaining(World.GateManager.Gates.Count);
@@ -63,15 +63,20 @@ public class Game : BaseObject
 
 	public void EndGame()
 	{
+		Debug.Log ("Game.EndGame");
+
 		var total = World.Game.TotalTime;
 		var best = PlayerPrefs.GetFloat("BestTime");
-		if (total > best)
-			return;
+		if (total < best)
+		{
+			// TODO: show a splash screen about best time
+			Debug.LogWarning("Best Time! " + total);
 
-		// TODO: show a splash screen about best time
-		Debug.LogWarning("Best Time! " + total);
+			PlayerPrefs.SetFloat("BestTime", total);
+			PlayerPrefs.SetString("BestGhostRace", World.Player.GetComponent<Recorder>().SerialiseToString());
+		}
 
-		PlayerPrefs.SetFloat("BestTime", total);
-		PlayerPrefs.SetString("BestGhostRace", World.Player.GetComponent<Recorder>().SerialiseToString());
+		// go back to title screen.
+		World.ActivateGame(false);
 	}
 }

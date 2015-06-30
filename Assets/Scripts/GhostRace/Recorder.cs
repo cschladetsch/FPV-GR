@@ -34,10 +34,15 @@ public class Recorder : BaseObject
 		base.Tick();
 	}
 
-	public string SerialiseToString ()
+	public string SerialiseToString()
 	{
 		Debug.LogError("Recorder.SerialiseToString not implemented");
 		return "";
 	}
-}
 
+	public List<StateRecord> SerialiseFromString(string text)
+	{
+		Debug.LogError("Recorder.SerialiseFromString not implemented");
+		return null;
+	}
+}

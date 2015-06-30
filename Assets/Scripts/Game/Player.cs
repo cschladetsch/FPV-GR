@@ -8,9 +8,6 @@ public class Player : BaseObject
 {
 	Camera FpVCamera;
 
-	[Tooltip("Where the player starts")]
-	public Transform StartPoint;
-
 	[Tooltip("How fast the player can accel")]
 	public float MaxAccel = 500;		// maximum acceleration in m/s/s
 	public float MaxSpeed = 20;			// m/s
@@ -40,9 +37,6 @@ public class Player : BaseObject
 
 		_recorder = GetComponent<Recorder>();
 		_playBack = GetComponent<Playback>();
-
-		transform.position = StartPoint.position;
-		transform.rotation = StartPoint.rotation;
 
 		Debug.Log ("Player Constructed");
 	}

@@ -23,7 +23,9 @@ public class GateManager : BaseObject
 		if (GateEntered != null)
 			GateEntered(gate);
 
-		if (Gates.Any(g => !g.HasBeenEntered))
+		var remaining = Gates.Count(g => !g.HasBeenEntered);
+		World.GameCanvas.SetNumGatesRemaining(remaining);
+		if (remaining > 0)
 			return;
 
 		World.Game.EndGame();

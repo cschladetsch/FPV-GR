@@ -41,7 +41,7 @@ public class GameCanvasController : BaseObject
 
 	public void SetTotalTime(float t)
 	{
-		TotalTimeText.text = t.ToString("{0:0.00");
+		TotalTimeText.text = t.ToString("F");
 	}
 
 	public void SetNumGatesRemaining(int g)
