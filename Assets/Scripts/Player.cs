@@ -32,6 +32,8 @@ public class Player : BaseObject
 
 		transform.position = StartPoint.position;
 		transform.rotation = StartPoint.rotation;
+
+		Debug.Log ("Player Constructed");
 	}
 
 	void ApplyFriction()
@@ -67,6 +69,7 @@ public class Player : BaseObject
 		transform.rotation = Quaternion.Slerp(rot, newRot, RotDampTime);
 		transform.position = Vector3.SmoothDamp(pos, pos + tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
 	}
+
 
 	// sigh... .net 4.5 [Flags]	
 	enum ControlInput
@@ -144,5 +147,10 @@ public class Player : BaseObject
 		ChangeSpeed(flags);
 
 		ChangeDirection(flags);
+	}
+
+	public void PassedThroughGate (GameObject gate)
+	{
+		Debug.Log ("Passed through " + gate.transform.parent.name);
 	}
 }

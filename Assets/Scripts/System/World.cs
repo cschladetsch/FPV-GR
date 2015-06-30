@@ -27,6 +27,8 @@ public class World : BaseObject
 	/// <value>The kernel.</value>
 	public new  Flow.IKernel Kernel { get { return _kernel; } }
 
+	public Player Player { get { return _player; } } 
+
 	/// <summary>
 	/// When using multiple mixin scenes, they are specified here.
 	/// This allows multiple people to work on differnt, otherwise disjoint aspects of
@@ -40,7 +42,9 @@ public class World : BaseObject
 	/// True if all mixin scenes are loaded
 	/// </summary>
 	private bool _loaded;
-	
+
+	Player _player;
+
 	/// <summary>
 	/// Invoked when the quit game button is pressed when in game mode
 	/// </summary>
@@ -80,6 +84,8 @@ public class World : BaseObject
 		Instance = this;
 
 		_kernel = Flow.Create.NewKernel();
+
+		_player = FindObjectOfType<Player>();
 
 		// TODO: combine scenes
 		_loaded = true;
