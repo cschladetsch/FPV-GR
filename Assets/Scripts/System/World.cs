@@ -45,12 +45,17 @@ public class World : BaseObject
 
 	Player _player;
 
+	void Start()
+	{
+		Awaken();
+	}
+
 	/// <summary>
 	/// Invoked when the quit game button is pressed when in game mode
 	/// </summary>
 	public void QuitFromGameButtonPressed()
 	{
-		CurrentLevel.Stop();
+		//CurrentLevel.Stop();
 		ActivateGame(false);
 		Debug.Log("World.EndGame");
 	}
@@ -65,14 +70,14 @@ public class World : BaseObject
 
 	void ActivateGame(bool inGame)
 	{
-		//Debug.Log("World.ActivateGame: " + inGame);
+		Debug.Log("World.ActivateGame: " + inGame);
 
 		// switch canvas's
 		GameCanvas.gameObject.SetActive(inGame);
 		StartCanvas.gameObject.SetActive(!inGame);
 
 		// switch Camera's
-		FindObjectOfType<Player>().GetComponent<Camera>().enabled = inGame;
+		Player.GetComponent<Camera>().enabled = inGame;
 		SplashCamera.enabled = !inGame;
 	}
 
@@ -81,6 +86,9 @@ public class World : BaseObject
 	/// </summary>
 	internal void Awaken()
 	{
+		if (Instance != null)
+			return;
+
 		Instance = this;
 
 		_kernel = Flow.Create.NewKernel();

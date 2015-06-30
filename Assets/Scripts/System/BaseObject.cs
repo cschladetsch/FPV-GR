@@ -58,14 +58,6 @@ public class BaseObject : MonoBehaviour
 		get { return World.Player; }
 	}
 
-	/// <summary>
-	/// The current level being played
-	/// </summary>
-	protected Level CurrentLevel
-	{
-		get { return World.CurrentLevel; }
-	}
-
 	public virtual void Pause(bool pause)
 	{
 		Paused = pause;
@@ -76,8 +68,12 @@ public class BaseObject : MonoBehaviour
 		_world = World.Instance;
 		if (_world == null)
 		{
-			FindObjectOfType<World>().Awaken();
-			_world = World.Instance;
+			var world = FindObjectOfType<World>();
+			if (!world.Loaded)
+			{
+				// TODO: add to things to Awake when world is fully loaded
+			}
+			_world = world;
 
 			// TODO _world.Awoken += Construct();
 			return;
