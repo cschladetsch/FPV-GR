@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameCanvasController : BaseObject
+public class StateRecord : BaseObject
 {
-	public Text TotalTimeText;
-	public Text NumGates;
-	
 	override protected void Construct()
 	{
 		base.Construct();
@@ -33,19 +30,5 @@ public class GameCanvasController : BaseObject
 	{
 		base.Tick();
 	}
-
-	public void QuitButtonPressed()
-	{
-		World.QuitFromGameButtonPressed();
-	}
-
-	public void SetTotalTime(float t)
-	{
-		TotalTimeText.text = t.ToString("{0:0.00");
-	}
-
-	public void SetNumGatesRemaining(int g)
-	{
-		NumGates.text = g.ToString();
-	}
 }
+

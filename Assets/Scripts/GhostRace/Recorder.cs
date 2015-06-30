@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GateManager : BaseObject
+public class Recorder : BaseObject
 {
+	[Tooltip("How long between samples")]
+	public float SampleTime = 0.100f;
+
 	override protected void Construct()
 	{
 		base.Construct();
@@ -29,6 +32,12 @@ public class GateManager : BaseObject
 	override protected void Tick()
 	{
 		base.Tick();
+	}
+
+	public string SerialiseToString ()
+	{
+		Debug.LogError("Recorder.SerialiseToString not implemented");
+		return "";
 	}
 }
 

@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class Gate : BaseObject
 {
+	public GameObject Indicator;
+
+	public bool HasBeenEntered { get; private	set; }
+
 	override protected void Construct()
 	{
 		base.Construct();
@@ -31,6 +35,16 @@ public class Gate : BaseObject
 		base.Tick();
 	}
 
+	public void Entered()
+	{
+		if (HasBeenEntered)
+			return;
+
+		HasBeenEntered = true;
+
+		Indicator.SetActive(false);
+	}
+
 	/// <summary>
 	/// Player has entered a gate - red should be on right,
 	/// which means +Z of this gate should be within 90 degrees of +z of quad
@@ -48,7 +62,7 @@ public class Gate : BaseObject
 
 		var player = otherParent.gameObject.GetComponent<Player>();
 		if (player != null)
-			player.PassedThroughGate(gameObject);
+			World.GateManager.Entered(this);
 	}
 }
 

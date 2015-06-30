@@ -23,12 +23,23 @@ public class Player : BaseObject
 	public float MoveDampTime = 0.2f;
 	public float RotDampTime = 0.5f;
 
+	public bool IsPlayingBack { get { return _isPlayingBack; } } 
+
+	List<StateRecord> _samples = new List<StateRecord>();
+
 	float _speed;
 	float _yaw, _pitch, _roll;
+	bool _isPlayingBack;
+
+	Recorder _recorder;
+	Playback _playBack;
 
 	override protected void Construct()
 	{
 		base.Construct();
+
+		_recorder = GetComponent<Recorder>();
+		_playBack = GetComponent<Playback>();
 
 		transform.position = StartPoint.position;
 		transform.rotation = StartPoint.rotation;
@@ -69,8 +80,7 @@ public class Player : BaseObject
 		transform.rotation = Quaternion.Slerp(rot, newRot, RotDampTime);
 		transform.position = Vector3.SmoothDamp(pos, pos + tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
 	}
-
-
+	
 	// sigh... .net 4.5 [Flags]	
 	enum ControlInput
 	{
@@ -152,5 +162,6 @@ public class Player : BaseObject
 	public void PassedThroughGate (GameObject gate)
 	{
 		Debug.Log ("Passed through " + gate.transform.parent.name);
+		//World.GateManager.PassedThrough(gate.GetComponent<Gate>());
 	}
 }

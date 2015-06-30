@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class World : BaseObject
 {
 	[Tooltip("The Canvas for use for the in-game scene")]
-	public Canvas GameCanvas;
+	public GameCanvasController GameCanvas;
 
 	[Tooltip("The Canvas for use for the pre-game scene")]
 	public Canvas StartCanvas;
@@ -29,6 +29,10 @@ public class World : BaseObject
 
 	public Player Player { get { return _player; } } 
 
+	public GateManager GateManager { get { return _gateManager; } } 
+
+	public Game Game { get { return _game; } } 
+
 	/// <summary>
 	/// When using multiple mixin scenes, they are specified here.
 	/// This allows multiple people to work on differnt, otherwise disjoint aspects of
@@ -44,6 +48,8 @@ public class World : BaseObject
 	private bool _loaded;
 
 	Player _player;
+
+	Game _game;
 
 	void Start()
 	{
@@ -68,6 +74,8 @@ public class World : BaseObject
 		ActivateGame(true);
 	}
 
+	GateManager _gateManager;
+
 	void ActivateGame(bool inGame)
 	{
 		Debug.Log("World.ActivateGame: " + inGame);
@@ -79,6 +87,10 @@ public class World : BaseObject
 		// switch Camera's
 		Player.GetComponent<Camera>().enabled = inGame;
 		SplashCamera.enabled = !inGame;
+
+		if (inGame)
+			Game.StartGame();
+
 	}
 
 	/// <summary>
@@ -94,6 +106,12 @@ public class World : BaseObject
 		_kernel = Flow.Create.NewKernel();
 
 		_player = FindObjectOfType<Player>();
+
+		GameCanvas = FindObjectOfType<GameCanvasController>();
+
+		_gateManager = FindObjectOfType<GateManager>();
+
+		_game = FindObjectOfType<Game>();
 
 		// TODO: combine scenes
 		_loaded = true;
