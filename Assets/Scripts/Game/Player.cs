@@ -119,10 +119,10 @@ public class Player : BaseObject
 	void ChangeSpeed(int flags)
 	{
 		if (On(flags, ControlInput.Forward))
-			_speed += MaxAccel;
+			_speed += MaxAccel*GameDeltaTime;
 
 		if (On(flags, ControlInput.Backward))
-			_speed -= MaxAccel;
+			_speed -= MaxAccel*GameDeltaTime;
 
 		_speed = Mathf.Clamp(_speed, -MaxSpeed, MaxSpeed);
 	}
