@@ -15,6 +15,8 @@ public class GateManager : BaseObject
 	{
 		Gates = FindObjectsOfType<Gate>().ToList();
 		Debug.Log ("There are " + Gates.Count + " gates");
+		foreach (var g in Gates)
+			g.Reset();
 		base.Construct();
 	}
 

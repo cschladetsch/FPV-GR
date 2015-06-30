@@ -33,7 +33,6 @@ public class StartCanvasController : BaseObject
 
 	public void StartButtonPressed()
 	{
-		Debug.Log ("Start button Pressed");
 		World.StartGame();
 	}
 }

@@ -35,6 +35,12 @@ public class Gate : BaseObject
 		base.Tick();
 	}
 
+	public void Reset ()
+	{
+		HasBeenEntered = false;
+		Indicator.SetActive(true);
+	}
+
 	public void Entered()
 	{
 		if (HasBeenEntered)
