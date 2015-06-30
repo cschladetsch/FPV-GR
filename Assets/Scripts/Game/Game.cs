@@ -53,6 +53,8 @@ public class Game : BaseObject
 
 	public void StartGame()
 	{
+		Debug.Log ("Game.StartGame");
+		
 		_time = 0;
 
 		World.GateManager.GatherGates();

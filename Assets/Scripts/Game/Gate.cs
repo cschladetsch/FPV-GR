@@ -59,7 +59,7 @@ public class Gate : BaseObject
 	void OnTriggerEnter(Collider other)
 	{
 		var angle = Vector3.Angle (transform.forward, other.transform.forward);
-		Debug.Log ("OnTriggerEnter: " + angle);
+		//Debug.Log ("OnTriggerEnter: " + angle);
 
 		if (angle > 90)
 			return;
