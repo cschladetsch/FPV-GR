@@ -14,7 +14,7 @@ public class BaseObject : MonoBehaviour
 
 	protected float GameDeltaTime;
 
-	protected float GameTime;
+	public float GameTime;
 
 	/// <summary>
 	/// If false, this game object will not be updated Tick() method

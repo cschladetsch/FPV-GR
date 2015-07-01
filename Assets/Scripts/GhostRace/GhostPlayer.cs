@@ -4,16 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Playback : BaseObject
+public class GhostPlayer : BaseObject
 {
-	Recorder _recorder;
-
-	public List<StateRecord> Samples { get { return _recorder.Samples; } }
-
-	public void FromRecorder(Recorder rec)
-	{
-		_recorder = rec;
-	}
 
 	override protected void Construct()
 	{
@@ -38,8 +30,6 @@ public class Playback : BaseObject
 	override protected void Tick()
 	{
 		base.Tick();
-
-
 	}
 }
 
