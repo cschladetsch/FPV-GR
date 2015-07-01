@@ -6,18 +6,32 @@ using UnityEngine.UI;
 
 public class Playback : BaseObject
 {
-	Recorder _recorder;
+	List<StateRecord> _samples = new List<StateRecord>();
 
-	public List<StateRecord> Samples { get { return _recorder.Samples; } }
+	GhostPlayer _ghost;
 
-	public void FromRecorder(Recorder rec)
+	public List<StateRecord> Samples { get { return _samples; } }
+
+	public static Playback CreateFromString(string text)
 	{
-		_recorder = rec;
+		var lines = text.Split(new char[]{'\n'});
+		var count = int.Parse(lines[0]);
+		var list = new List<StateRecord>();
+		for (var n = 0; n < count; ++n)
+		{
+			list.Add (StateRecord.SerialiseFromString(lines[n]));
+		}
+
+		var pb = new Playback();
+		pb._samples = list;
+		return pb;
 	}
 
 	override protected void Construct()
 	{
 		base.Construct();
+
+		_ghost = GetComponent<GhostPlayer>();
 	}
 
 	override protected void Destruct()
@@ -25,9 +39,9 @@ public class Playback : BaseObject
 		base.Destruct();
 	}
 
-	override protected void ResetForPool()
+	override protected void StartLevel()
 	{
-		base.ResetForPool();
+		base.StartLevel();
 	}
 	
 	override protected void BeforeFirstTick()

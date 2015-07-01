@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class GhostPlayer : BaseObject
 {
+	Playback _playBack;
+
+	public void SetRecording (string rec)
+	{
+		_playBack = Playback.CreateFromString(rec);
+	}
 
 	override protected void Construct()
 	{
@@ -17,9 +23,9 @@ public class GhostPlayer : BaseObject
 		base.Destruct();
 	}
 
-	override protected void ResetForPool()
+	override protected void StartLevel()
 	{
-		base.ResetForPool();
+		base.StartLevel();
 	}
 	
 	override protected void BeforeFirstTick()

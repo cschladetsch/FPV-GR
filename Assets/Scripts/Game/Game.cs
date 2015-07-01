@@ -11,6 +11,8 @@ public class Game : BaseObject
 {
 	public float TotalTime { get { return _time; } }
 
+	public GhostPlayer GhostPlayer;
+
 	private float _time;
 
 	override protected void Construct()
@@ -31,9 +33,9 @@ public class Game : BaseObject
 		base.Destruct();
 	}
 
-	override protected void ResetForPool()
+	override protected void StartLevel()
 	{
-		base.ResetForPool();
+		base.StartLevel();
 	}
 	
 	override protected void BeforeFirstTick()
@@ -61,6 +63,12 @@ public class Game : BaseObject
 
 		World.GateManager.GatherGates();
 
+		var rec = PlayerPrefs.GetString("BestGhostRace");
+		if (!string.IsNullOrEmpty(rec))
+		{
+			GhostPlayer.SetRecording(rec);
+		}
+ 
 		World.GameCanvas.SetNumGatesRemaining(World.GateManager.Gates.Count);
 		World.GameCanvas.SetTotalTime(0);
 	}

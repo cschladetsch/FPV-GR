@@ -14,7 +14,7 @@ public class StateRecord
 		                      GameTime);
 	}
 
-	public StateRecord SerialiseFromString(string text)
+	public static StateRecord SerialiseFromString(string text)
 	{
 		var sr = new StateRecord();
 		var sp = text.Split (new char[]{' '});

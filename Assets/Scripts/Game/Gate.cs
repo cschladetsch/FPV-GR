@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -28,9 +28,9 @@ public class Gate : BaseObject
 		base.Destruct();
 	}
 
-	override protected void ResetForPool()
+	override protected void StartLevel()
 	{
-		base.ResetForPool();
+		base.StartLevel();
 	}
 	
 	override protected void BeforeFirstTick()

@@ -84,7 +84,7 @@ public class BaseObject : MonoBehaviour
 		Construct();
 	}
 
-	protected virtual void ResetForPool()
+	protected virtual void StartLevel()
 	{
 	}
 

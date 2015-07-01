@@ -34,9 +34,9 @@ public class Recorder : BaseObject
 		base.Destruct();
 	}
 
-	override protected void ResetForPool()
+	override protected void StartLevel()
 	{
-		base.ResetForPool();
+		base.StartLevel();
 	}
 	
 	override protected void BeforeFirstTick()
@@ -59,9 +59,5 @@ public class Recorder : BaseObject
 		return sb.ToString();
 	}
 
-	public List<StateRecord> SerialiseFromString(string text)
-	{
-		Debug.LogError("Recorder.SerialiseFromString not implemented");
-		return null;
-	}
+
 }
