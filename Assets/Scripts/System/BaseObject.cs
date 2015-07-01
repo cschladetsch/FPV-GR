@@ -84,8 +84,9 @@ public class BaseObject : MonoBehaviour
 		Construct();
 	}
 
-	protected virtual void StartLevel()
+	public virtual void StartLevel()
 	{
+		GameTime = 0;
 	}
 
 	protected virtual void Construct()

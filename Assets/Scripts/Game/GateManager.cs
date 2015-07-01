@@ -23,6 +23,13 @@ public class GateManager : BaseObject
 		base.Construct();
 	}
 
+	public override void StartLevel()
+	{
+		base.StartLevel();
+
+		GatherGates();
+	}
+
 	public void Entered (Gate gate)
 	{
 		if (GateEntered != null)

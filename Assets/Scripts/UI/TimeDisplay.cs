@@ -19,7 +19,7 @@ public class TimeDisplay : BaseObject
 		base.Destruct();
 	}
 
-	override protected void StartLevel()
+	override public void StartLevel()
 	{
 		base.StartLevel();
 	}

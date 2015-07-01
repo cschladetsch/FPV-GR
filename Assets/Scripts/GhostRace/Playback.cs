@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controller for feeding new states for ghost players
+/// </summary>
 public class Playback : BaseObject
 {
 	List<StateRecord> _samples = new List<StateRecord>();
@@ -39,7 +42,7 @@ public class Playback : BaseObject
 		base.Destruct();
 	}
 
-	override protected void StartLevel()
+	override public void StartLevel()
 	{
 		base.StartLevel();
 	}

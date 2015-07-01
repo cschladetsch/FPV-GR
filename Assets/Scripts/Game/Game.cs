@@ -9,11 +9,7 @@ using UnityEngine.UI;
 /// </summary>
 public class Game : BaseObject
 {
-	public float TotalTime { get { return _time; } }
-
 	public GhostPlayer GhostPlayer;
-
-	private float _time;
 
 	override protected void Construct()
 	{
@@ -33,7 +29,7 @@ public class Game : BaseObject
 		base.Destruct();
 	}
 
-	override protected void StartLevel()
+	override public void StartLevel()
 	{
 		base.StartLevel();
 	}
@@ -50,18 +46,15 @@ public class Game : BaseObject
 	{
 		base.Tick();
 
-		_time += GameDeltaTime;
-
-		World.GameCanvas.SetTotalTime(_time);
+		World.GameCanvas.SetTotalTime(GameTime);
 	}
 
 	public void StartGame()
 	{
-		Debug.Log("Game.StartGame");
-		
-		_time = 0;
+		foreach (var go in FindObjectsOfType<BaseObject>())
+			go.StartLevel();
 
-		World.GateManager.GatherGates();
+		Debug.Log("Game.StartGame");
 
 		var rec = PlayerPrefs.GetString("BestGhostRace");
 		if (!string.IsNullOrEmpty(rec))
@@ -77,7 +70,7 @@ public class Game : BaseObject
 	{
 		Debug.Log ("Game.EndGame");
 
-		var total = World.Game.TotalTime;
+		var total = World.Game.GameTime;
 		var best = PlayerPrefs.GetFloat("BestTime");
 		if (total < best)
 		{
