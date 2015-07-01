@@ -90,7 +90,6 @@ public class World : BaseObject
 
 		if (inGame)
 			Game.StartGame();
-
 	}
 
 	/// <summary>

@@ -32,6 +32,8 @@ public class Game : BaseObject
 	override public void StartLevel()
 	{
 		base.StartLevel();
+
+		//StartGame();
 	}
 	
 	override protected void BeforeFirstTick()
