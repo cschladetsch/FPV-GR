@@ -128,6 +128,10 @@ public class World : BaseObject
 
 	override protected void Tick()
 	{
+		if (Kernel != null)
+		{
+			Kernel.Step();
+		}
 	}
 }
 

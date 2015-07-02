@@ -55,8 +55,6 @@ public class Playback : BaseObject
 	override protected void Tick()
 	{
 		base.Tick();
-
-
 	}
 }
 

@@ -72,15 +72,19 @@ public class BaseObject : MonoBehaviour
 			if (!world.Loaded)
 			{
 				// TODO: add to things to Awake when world is fully loaded
+				return;
 			}
 			_world = world;
+			_world.Awaken();
 
 			// TODO _world.Awoken += Construct();
+			Debug.Log ("World not awoken yet: " + name);
 			return;
 		}
 
 		_world.Awaken();
 
+			Debug.Log ("Constructing:\t " + name);
 		Construct();
 	}
 

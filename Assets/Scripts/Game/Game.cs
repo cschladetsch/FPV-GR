@@ -61,7 +61,7 @@ public class Game : BaseObject
 		var rec = PlayerPrefs.GetString("BestGhostRace");
 		if (!string.IsNullOrEmpty(rec))
 		{
-			GhostPlayer.SetRecording(rec);
+			GhostPlayer.StartPlaying(rec);
 		}
  
 		World.GameCanvas.SetNumGatesRemaining(World.GateManager.Gates.Count);

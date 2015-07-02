@@ -1,4 +1,6 @@
-//
+// (C) 2009-2015 Christian.Schladetsch@gmail.com
+
+using UnityEngine;
 
 namespace Flow
 {

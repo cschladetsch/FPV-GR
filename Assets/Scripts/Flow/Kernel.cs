@@ -1,6 +1,8 @@
 //
 
 using System;
+using UnityEngine;
+using System.Linq;
 
 namespace Flow
 {
@@ -31,9 +33,10 @@ namespace Flow
 		public override void Step()
 		{
 			StepTime();
-
 			if (IsNullOrEmpty(Root))
 				return;
+	
+			//Debug.LogFormat("Kernel.Step: {0}", Root.Contents.Count());
 
 			Root.Step();
 			Root.Post();

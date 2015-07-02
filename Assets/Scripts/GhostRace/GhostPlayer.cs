@@ -8,7 +8,7 @@ public class GhostPlayer : BaseObject
 {
 	Playback _playBack;
 
-	public void SetRecording (string rec)
+	public void StartPlaying (string rec)
 	{
 		_playBack = Playback.CreateFromString(rec);
 	}

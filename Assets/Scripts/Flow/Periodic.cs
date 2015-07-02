@@ -1,6 +1,7 @@
 //
 
 using System;
+using UnityEngine;
 
 namespace Flow
 {
@@ -11,6 +12,8 @@ namespace Flow
 
 		internal Periodic(IKernel kernel, TimeSpan interval)
 		{
+			Debug.Log ("Periodic Timer Created");
+
 			Interval = interval;
 			TimeStarted = kernel.Time.Now;
 			_expires = TimeStarted + Interval;

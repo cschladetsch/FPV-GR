@@ -7,6 +7,8 @@ using System.Text;
 
 public class Recorder : BaseObject
 {
+	public Object MarkerPrefab;
+
 	[Tooltip("How long between samples")]
 	public float SampleTime = 0.100f;
 
@@ -19,14 +21,22 @@ public class Recorder : BaseObject
 	override protected void Construct()
 	{
 		base.Construct();
-	
+
 		_timer = Kernel.Factory.NewPeriodicTimer(System.TimeSpan.FromSeconds(SampleTime));
 		_timer.Elapsed += TakeSample;
 	}
 
 	void TakeSample (Flow.ITransient sender)
 	{
-		_samples.Add(new StateRecord(this));
+		var sr = new StateRecord (this);
+		_samples.Add(sr);
+
+		if (MarkerPrefab != null)
+		{
+			var marker = (GameObject)Instantiate(MarkerPrefab);
+			marker.transform.position = sr.Position;
+			marker.transform.rotation = sr.Rotation;
+		}
 	}
 
 	override protected void Destruct()
