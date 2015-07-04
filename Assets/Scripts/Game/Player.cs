@@ -41,7 +41,7 @@ public class Player : BaseObject
 		_recorder = GetComponent<Recorder>();
 		_playBack = GetComponent<Playback>();
 
-		Debug.Log ("Player Constructed");
+//		Debug.Log ("Player Constructed");
 	}
 
 	void ApplyFriction()

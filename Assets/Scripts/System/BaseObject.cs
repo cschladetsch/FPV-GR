@@ -84,7 +84,7 @@ public class BaseObject : MonoBehaviour
 
 		_world.Awaken();
 
-			Debug.Log ("Constructing:\t " + name);
+		//Debug.Log ("Constructing:\t " + name);
 		Construct();
 	}
 
