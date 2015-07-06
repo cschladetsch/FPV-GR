@@ -73,13 +73,17 @@ public class Player : BaseObject
 
 	Vector3 _moveVel;
 
+	public float ScaleSpeedHeight = 1.2f;
+
 	void Move()
 	{
 		var tr = transform;	
 		var pos = tr.position;
 		var rot = tr.rotation;
 		var newRot = Quaternion.AngleAxis(_yaw, Vector3.up);
-		
+
+		var sp = _terrain.SampleHeight(transform.position)*ScaleSpeedHeight*_speed;
+
 		transform.rotation = Quaternion.Slerp(rot, newRot, RotDampTime);
 		transform.position = Vector3.SmoothDamp(pos, pos + tr.forward*_speed*Time.deltaTime, ref _moveVel, MoveDampTime);
 	}
