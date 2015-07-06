@@ -11,7 +11,7 @@ public class Playback : BaseObject
 {
 	List<StateRecord> _samples = new List<StateRecord>();
 
-	GhostPlayer _ghost;
+//	GhostPlayer _ghost;
 
 	public List<StateRecord> Samples { get { return _samples; } }
 
@@ -32,7 +32,7 @@ public class Playback : BaseObject
 	{
 		base.Construct();
 
-		_ghost = GetComponent<GhostPlayer>();
+		//_ghost = GetComponent<GhostPlayer>();
 	}
 
 	override protected void Destruct()

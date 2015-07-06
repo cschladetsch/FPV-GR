@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls the main game flow
+/// </summary>
 public class World : BaseObject
 {
 	[Tooltip("The Canvas for use for the in-game scene")]
@@ -27,7 +30,7 @@ public class World : BaseObject
 	/// <value>The kernel.</value>
 	public new  Flow.IKernel Kernel { get { return _kernel; } }
 
-	public Player Player { get { return _player; } } 
+	public new Player Player { get { return _player; } } 
 
 	public GateManager GateManager { get { return _gateManager; } } 
 

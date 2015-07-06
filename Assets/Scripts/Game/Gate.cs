@@ -11,6 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public class Gate : BaseObject
 {
+	AudioSource _audio;
 	public AudioClip PassSound;
 	public AudioClip FailSound;
 
@@ -24,6 +25,8 @@ public class Gate : BaseObject
 	override protected void Construct()
 	{
 		base.Construct();
+
+		_audio = GetComponent<AudioSource>();
 	}
 
 	override protected void Destruct()
@@ -79,13 +82,20 @@ public class Gate : BaseObject
 		//Debug.Log ("OnTriggerEnter: " + angle);
 
 		if (angle > 90)
+		{
+			_audio.clip = FailSound;
+			_audio.Play ();
 			return;
-
+		}
 		var otherParent = other.transform.parent;
 		if (otherParent == null)
 			return;
 
 		var player = otherParent.gameObject.GetComponent<Player>();
+
+		_audio.clip = PassSound;
+		_audio.Play ();
+		
 		if (player != null)
 			World.GateManager.Entered(this);
 	}

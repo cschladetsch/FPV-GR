@@ -24,27 +24,14 @@ public class Player : BaseObject
 	public float MoveDampTime = 0.2f;
 	public float RotDampTime = 0.5f;
 
-	public bool IsPlayingBack { get { return _isPlayingBack; } } 
-
-	List<StateRecord> _samples = new List<StateRecord>();
-
 	float _speed;
 	float _yaw, _pitch, _roll;
-	bool _isPlayingBack;
-
-	Recorder _recorder;
-	Playback _playBack;
 
 	override protected void Construct()
 	{
 		base.Construct();
-
-		_recorder = GetComponent<Recorder>();
-		_playBack = GetComponent<Playback>();
-
-//		Debug.Log ("Player Constructed");
 	}
-
+	
 	override public void StartLevel()
 	{
 		transform.position = StartPos.position;
