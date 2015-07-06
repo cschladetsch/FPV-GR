@@ -10,6 +10,12 @@ using UnityEngine.UI;
 /// </summary>
 public class StartCanvasController : BaseObject
 {
+	public void ClearGhostRace()
+	{
+		PlayerPrefs.SetFloat("BestTime", 0);
+		PlayerPrefs.SetString("BestGhostRace", null);
+	}
+
 	override protected void Construct()
 	{
 		base.Construct();

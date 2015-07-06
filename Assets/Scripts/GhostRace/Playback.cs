@@ -15,19 +15,17 @@ public class Playback : BaseObject
 
 	public List<StateRecord> Samples { get { return _samples; } }
 
-	public static Playback CreateFromString(string text)
+	public void CreateFromString(string text)
 	{
 		var lines = text.Split(new char[]{'\n'});
 		var count = int.Parse(lines[0]);
 		var list = new List<StateRecord>();
-		for (var n = 0; n < count; ++n)
+		for (var n = 1; n < count; ++n)
 		{
 			list.Add (StateRecord.SerialiseFromString(lines[n]));
 		}
 
-		var pb = new Playback();
-		pb._samples = list;
-		return pb;
+		_samples = list;
 	}
 
 	override protected void Construct()

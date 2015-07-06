@@ -22,11 +22,15 @@ public class Recorder : BaseObject
 	{
 		base.Construct();
 
+		// take an initial sample at starting location
+		TakeSample (null);
+
+		// take samples at refgular intervals
 		_timer = Kernel.Factory.NewPeriodicTimer(System.TimeSpan.FromSeconds(SampleTime));
 		_timer.Elapsed += TakeSample;
 	}
 
-	void TakeSample (Flow.ITransient sender)
+	public void TakeSample (Flow.ITransient sender)
 	{
 		var sr = new StateRecord (this);
 		_samples.Add(sr);
@@ -67,10 +71,8 @@ public class Recorder : BaseObject
 		foreach (var s in _samples)
 			sb.AppendLine(s.SerialiseToString());
 
-		Debug.Log (sb.ToString ());
+//		Debug.Log (sb.ToString ());
 
 		return sb.ToString();
 	}
-
-
 }

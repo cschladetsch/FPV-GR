@@ -18,6 +18,7 @@ public class StateRecord
 	{
 		var sr = new StateRecord();
 		var sp = text.Split (new char[]{' '});
+
 		sr.Position = new Vector3(float.Parse (sp[0]), float.Parse (sp[1]), float.Parse (sp[2]));
 		sr.Rotation = new Quaternion(float.Parse (sp[3]), float.Parse (sp[4]), float.Parse (sp[5]), float.Parse (sp[6]));
 		sr.GameTime = float.Parse(sp[7]);

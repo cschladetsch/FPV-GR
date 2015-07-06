@@ -49,6 +49,11 @@ public class Game : BaseObject
 		base.Tick();
 
 		World.GameCanvas.SetTotalTime(GameTime);
+
+#if DEBUG
+		if (Input.GetKeyDown (KeyCode.G))
+			PlayerPrefs.SetFloat("BestTime", 0);
+#endif
 	}
 
 	public void StartGame()
@@ -61,7 +66,12 @@ public class Game : BaseObject
 		var rec = PlayerPrefs.GetString("BestGhostRace");
 		if (!string.IsNullOrEmpty(rec))
 		{
+			GhostPlayer.gameObject.SetActive(true);
 			GhostPlayer.StartPlaying(rec);
+		}
+		else
+		{
+			GhostPlayer.gameObject.SetActive(false);
 		}
  
 		World.GameCanvas.SetNumGatesRemaining(World.GateManager.Gates.Count);
@@ -74,8 +84,13 @@ public class Game : BaseObject
 
 		var total = World.Game.GameTime;
 		var best = PlayerPrefs.GetFloat("BestTime");
-		if (total < best)
+		Debug.LogFormat ("Current {0}, best {1}", total, best);
+
+		if (total < best || best == 0)
 		{
+			// add a final record as we enter last gate
+			Player.GetComponent<Recorder>().TakeSample(null);
+
 			// TODO: show a splash screen about best time
 			Debug.LogWarning("Best Time! " + total);
 
