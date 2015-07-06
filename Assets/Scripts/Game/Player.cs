@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Player : BaseObject
 {
 	Camera FpVCamera;
+	public Transform StartPos;
 
 	[Tooltip("How fast the player can accel")]
 	public float MaxAccel = 500;		// maximum acceleration in m/s/s
@@ -44,9 +45,15 @@ public class Player : BaseObject
 //		Debug.Log ("Player Constructed");
 	}
 
+	override public void StartLevel()
+	{
+		transform.position = StartPos.position;
+		transform.rotation = StartPos.rotation;
+	}
+
 	void ApplyFriction()
 	{
-		var fr = SpeedFriction*Time.deltaTime;
+		var fr = _speed*SpeedFriction*Time.deltaTime;
 
 		if (_speed > 0)
 			_speed -= fr;

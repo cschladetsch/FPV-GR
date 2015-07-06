@@ -31,12 +31,12 @@ public class Recorder : BaseObject
 		var sr = new StateRecord (this);
 		_samples.Add(sr);
 
-		if (MarkerPrefab != null)
-		{
-			var marker = (GameObject)Instantiate(MarkerPrefab);
-			marker.transform.position = sr.Position;
-			marker.transform.rotation = sr.Rotation;
-		}
+//		if (MarkerPrefab != null)
+//		{
+//			var marker = (GameObject)Instantiate(MarkerPrefab);
+//			marker.transform.position = sr.Position;
+//			marker.transform.rotation = sr.Rotation;
+//		}
 	}
 
 	override protected void Destruct()
@@ -48,7 +48,8 @@ public class Recorder : BaseObject
 	{
 		base.StartLevel();
 	}
-	
+
+	// testing capturing gifs and sending to Slack
 	override protected void BeforeFirstTick()
 	{
 		base.BeforeFirstTick();
@@ -65,6 +66,8 @@ public class Recorder : BaseObject
 		sb.AppendLine(_samples.Count.ToString());
 		foreach (var s in _samples)
 			sb.AppendLine(s.SerialiseToString());
+
+		Debug.Log (sb.ToString ());
 
 		return sb.ToString();
 	}
