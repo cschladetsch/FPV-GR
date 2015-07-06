@@ -12,6 +12,8 @@ public class Player : BaseObject
 	Camera FpVCamera;
 	public Transform StartPos;
 
+	public float Height;
+
 	[Tooltip("How fast the player can accel")]
 	public float MaxAccel = 500;		// maximum acceleration in m/s/s
 	public float MaxSpeed = 20;			// m/s
@@ -26,10 +28,12 @@ public class Player : BaseObject
 
 	float _speed;
 	float _yaw, _pitch, _roll;
+	Terrain _terrain;
 
 	override protected void Construct()
 	{
 		base.Construct();
+		_terrain = FindObjectOfType<Terrain>();
 	}
 	
 	override public void StartLevel()
@@ -57,6 +61,14 @@ public class Player : BaseObject
 		ApplyFriction();
 
 		Move();
+
+		AdjustTerrainHeight();
+	}
+
+	void AdjustTerrainHeight()
+	{
+		var h = _terrain.SampleHeight(transform.position);
+		transform.SetY(h + Height);
 	}
 
 	Vector3 _moveVel;

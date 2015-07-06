@@ -52,7 +52,7 @@ public class GhostPlayer : BaseObject
 			}
 		}
 
-		if (next != null)
+		if (next != null && (prev != null && prev.GameTime < t))
 			SetGhostPlayerTransform (prev, next);
 	}
 
