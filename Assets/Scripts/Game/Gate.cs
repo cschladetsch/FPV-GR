@@ -11,6 +11,9 @@ using UnityEngine.UI;
 /// </summary>
 public class Gate : BaseObject
 {
+	public AudioClip PassSound;
+	public AudioClip FailSound;
+
 	/// <summary>
 	/// The indicator that shows if this gate has been passed through or not.
 	/// </summary>

@@ -84,9 +84,9 @@ public class World : BaseObject
 		GameCanvas.gameObject.SetActive(inGame);
 		StartCanvas.gameObject.SetActive(!inGame);
 
-		// switch Camera's
-		Player.GetComponent<Camera>().enabled = inGame;
-		SplashCamera.enabled = !inGame;
+//		// switch Camera's
+//		Player.GetComponent<Camera>().enabled = inGame;
+//		SplashCamera.enabled = !inGame;
 
 		if (inGame)
 			Game.StartGame();
