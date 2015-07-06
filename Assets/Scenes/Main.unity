@@ -918,7 +918,7 @@ GameObject:
   - 4: {fileID: 924147710}
   - 114: {fileID: 924147711}
   - 114: {fileID: 924147712}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GhostPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2350,7 +2350,7 @@ GameObject:
   - 65: {fileID: 1934690404}
   - 23: {fileID: 1934690403}
   - 96: {fileID: 1934690402}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
